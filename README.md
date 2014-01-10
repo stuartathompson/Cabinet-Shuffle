@@ -5,6 +5,6 @@ Canadian Prime Minster Stephen Harper was set to shuffle his cabinet amid scanda
 
 Coding, design, layout and data work by Stuart A. Thompson
 
-Edited by Chris Hannay
+Edited and written by Chris Hannay
 
 See the final version: http://www.theglobeandmail.com/news/politics/game-think-you-can-predict-harpers-next-cabinet-prove-it/article12594406/
