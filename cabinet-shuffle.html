@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="http://www.stuartathompson.com/globedev/base/jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://beta.images.theglobeandmail.com/media/www/css/global.fonts.css">
+<script src="http://www.stuartathompson.com/globedev/base/tabletop.js"></script>
+
+<!-- Easing -->
+<script src="http://www.stuartathompson.com/globedev/base/jquery.easing.min.js"></script>
+
+<style type="text/css">
+#gi a img{
+	border:0;
+}
+.embeddable-body p{
+line-height: 1.5;
+}
+#gi{
+    font: normal normal 12px/1.5 Verdana, Helvetica, Arial, sans-serif;
+	width:940px;
+	margin:0 auto;
+	position: relative;
+}
+#gi h4{
+	font-family:"PrattHeavy",sans-serif;
+	font-weight:normal;
+	font-size:15px;
+	margin:0;
+}
+.checkmark{
+	z-index: 100;
+	display:none;
+	position: absolute;
+	bottom: 72px;
+	right: 11px;
+	width: 16px;
+	height: 16px;
+	background-image: url('http://beta.images.theglobeandmail.com/static/templates/images/checkmark.png');
+}
+#gi-nav{
+	width:120px;
+	float:left;
+	position: absolute;
+	left:0;
+	top:0;
+}
+#user-start #email-not-found{
+	float:left;
+	padding:9px;
+	margin-left:5px;
+	font-size:12px;
+	font-family:Arial,sans-serif;
+	color:#d60000;
+	display:none;
+}
+#user-start input{
+	float:left;
+	padding:9px;
+	font-size:15px;
+	float:left;
+	font-family:Arial,sans-serif;
+	margin:0 5px 0 0;
+	border:1px solid #b0b0b0;
+	border-radius:5px 5px 5px 5px;
+	-moz-border-radius:5px 5px 5px 5px;
+	-webkit-border-radius:5px 5px 5px 5px;
+	outline:none;
+}
+#user-input .gi-button{
+	clear:none;
+}
+#user-input input{
+	color:#b0b0b0;
+}
+#gi-container{
+width:810px;
+float:left;
+margin-left:130px;
+}
+p.large{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:15px;
+	line-height:2;
+	margin:0 0 15px 0;
+}
+.mp-container p.large{
+	line-height:1.4;
+	margin-bottom:25px;
+	padding-bottom:21px;
+	border-bottom:1px solid #b0b0b0;
+}
+.mp-container h3 .gi-button{
+	font-size: 14px;
+	margin-top: -10px;
+}
+.mp-container h4 .gi-next{
+	display:none;
+}
+/*- Button -*/
+.gi-button{
+	display:block;
+	font-family:"PrattRegular",Arial,sans-serif;
+	font-size:18px;
+	color:white !important;
+	background-color:#4c5bc8;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border:3px;
+	float:left;
+	clear:both;
+	padding:5px 18px 5px 18px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.gi-button:hover{
+	background-color:rgb(62, 79, 207);
+	color:white;
+}
+
+/* MPs */
+#user-input h2,#confirm-cabinet h2{
+	font-family:"PrattHeavy",sans-serif;
+	font-size:38px;
+	font-weight:normal;
+	margin:0;
+}
+#user-input h4{
+	color:red;
+	margin:0 0 10px 0;
+}
+#user-input h4 span{
+	color:black;
+}
+#confirm-cabinet{
+	margin-top:0 !important;
+}
+.lede-cabinet{
+	display:none;
+	height:250px;
+}
+.lede-cabinet{
+	clear:both;
+	float:left;
+	width:100%;
+	margin-top:50px;
+}
+.current-minister{
+	float:left;
+}
+.lede-cabinet .mp.noselect,.current-minister .mp.noselect{
+	opacity:1 !important;
+}
+.lede-cabinet .mp{
+	float:left;
+	width:161px;
+	height:226px;
+	margin-right:1px;
+}
+.lede-cabinet .mp-img{
+	float:left;
+	height:161px;
+	width:161px;
+	overflow: hidden;
+}
+.lede-cabinet .mp-img img{
+	margin-top:161px;
+	width:162px;
+}
+.lede-cabinet .mp h5{
+	margin-top:5px;
+	font-family:"PrattHeavy",Helvetica,Arial,sans-serif;
+	font-size:14px;
+	font-weight:normal;
+	display:none;
+}
+/* Confirm cabinet */
+#confirm-username input, #confirm-email input{
+	border:0;
+	outline:none;
+	padding:3px;
+	font-size:14px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+#confirm-username, #confirm-email{
+	padding:2px;
+	float:left;
+	margin:0 15px 20px 0;
+	border:1px solid #b0b0b0;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+#confirm-cabinet .gi-edit{
+	float: right;
+	margin-top: -37px;
+}
+#confirm-cabinet p.large{
+	line-height: 1.4;
+	margin-bottom: 7px;
+	padding-top: 29px;
+	border-bottom: 0px;
+	float: left;
+	border-top: 1px solid #ececec;
+	margin-top: 40px;
+}
+/* social */
+#gi-social{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+#gi-social p{
+	margin: 10px 0 5px 0;
+}
+	#gi-nav h5{
+		font-family:"PrattHeavy",sans-serif;
+		font-weight:normal;
+		color:red;
+		line-height:1;
+		font-size:16px;
+		margin:0 0 10px 0;
+	}
+	#build-nav{
+		display:none;
+	}
+	.mp-nav{
+		display:none;
+		cursor: pointer;
+	}
+	.mp-nav-img{
+		overflow:hidden;
+		width:60px;
+		height:90px;
+		text-align:center;
+	}
+	.mp-nav-img img{
+		width:60px;
+	}
+	.mp-nav-bar{
+		margin:3px 0;
+		height:5px;
+		width:60px;
+		background-color:#ececec;
+	}
+	.mp-nav-bar.selected{
+		background-color:#333;
+	}
+	.mp-nav-bar.complete{
+		background-color:#45af57;
+	}
+	.mp-nav-name{
+		font-family:Arial,Helvetica,sans-serif;
+		font-size:9px;
+		line-height:1.2;
+		letter-spacing:1px;
+		margin-bottom:17px;
+	}
+	/* - Build your own - */
+	#build-container{
+		display: none;
+	}
+	.mp-container{
+		display:none;
+	}
+	.mp-container h3{
+		font-family:"PrattHeavy",sans-serif;
+		font-size:19px;
+		font-weight:normal;
+		margin:0 0 16px 0;
+		padding:0 0 11px 0;
+		border-bottom:1px solid #b0b0b0;
+	}
+	.mp-container h4{
+		font-size:15px;
+		margin:10px 0 10px 0 !important;
+		padding-top:10px;
+		border-top:1px solid #b0b0b0;
+		font-family:"PrattHeavy",sans-serif;
+		font-weight:normal;
+		clear:both;
+		text-transform: uppercase;
+	}
+	.gi-unit .mp .onoff.lg{
+		width:21px;
+		height:21px;
+		position: absolute;
+		z-index: 10;
+		right: 23px;
+		bottom: 8px;
+		background-image:url('cabinet-shuffle-assets/onoff-lg.png');
+		background-position:0 1px;
+	}
+	.mp .onoff.sm{
+		width: 14px;
+		height: 14px;
+		background-image: url('cabinet-shuffle-assets/onoff-sm.png');
+		position: absolute;
+		top: 59px;
+		left: 59px;
+		background-position: 0 1px;
+	}
+	.mp.noselect .onoff.lg, .mp.noselect .onoff.sm{
+		display:none;
+	}
+	.mp.noselect{
+		opacity:.5;
+		position: relative;
+		cursor:default !important;
+	}
+	.mp.selected.noselect{
+		opacity:1;
+	}
+	
+	.gi-unit .mp.selected .onoff.lg{
+		background-position: 0 21px;
+		display:block;
+	}
+	.mp.selected .onoff.sm{
+		background-position: 0 14px;
+		display:block !important;
+	}
+	.gi-unit{
+		float:left;
+		width:375px;
+		padding-right:10px;
+	}
+	.gi-unit h6,.mp-others h6{
+		color:red;
+		margin:7px 0 6px 0;
+		font-family:"PrattHeavy",sans-serif;
+		font-weight:normal;
+		font-size:12px;
+		text-transform: uppercase;
+	}
+	.gi-unit .mp-img{
+		position: relative;
+		float:left;
+		width:161px;
+		height:217px;
+		overflow:hidden;
+		padding-right:15px;
+		cursor: pointer;
+	}
+	.gi-unit .mp-img img{
+		margin-top:-20px;
+		width:162px;
+	}
+	.gi-unit .mp h5{
+		font-size:17px;
+		font-family:"PrattHeavy",sans-serif;
+		font-weight:normal;
+		width:180px;
+		margin:0;
+		padding:0;
+		float:left;
+	}
+	#gi h5 span{
+		font-family:"PrattRegular",sans-serif;
+	}
+	.gi-unit p{
+		margin:10px 0;
+		width:180px;
+		float:left;
+	}
+	/* - Other Mps - */
+	.mp-others{
+		float:left;
+		margin-top:28px;
+		overflow: hidden;
+		clear:both;
+		position: relative;
+		width:810px;
+	}
+	.mp-arrow{
+		height:25px;
+		width:25px;
+		background-image: url('cabinet-shuffle-assets/arrow-next.png?1');
+		position: absolute;
+		right: 71px;
+		cursor: pointer;
+		top: 52px;
+		z-index: 1000;
+		background-position: 0 25px;
+		display:none;
+	}
+	.mp-arrow.right{
+		right:40px;
+		background-position:0 0;
+	}
+	.mp-block-container{
+		position: relative;
+		width:710px;
+		height:190px;
+	}
+	.mp-sm-block{
+		display: block;
+		width:810px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display:none;
+	}
+	.mp.sm{
+		width:78px;
+		cursor: pointer;
+		font-size:10px;
+		padding-right:10px;
+		float:left;
+		position: relative;
+		margin-bottom:15px;
+	}
+	.mp.sm .mp-img{
+		width:79px;
+		height:79px;
+		overflow: hidden;
+	}
+	.mp.sm .mp-img img{
+		width:100%;
+		margin-top:-10px;
+	}
+	.gi-next{
+		text-align:right;
+		float:right;
+		display: none;
+		margin-top:10px;
+	}
+	#final-button{
+		display: none !important;
+	}
+	/* - Tooltip -*/
+	#tooltip{
+		position: absolute;
+		z-index: 1000;
+		width:198px;
+		background-color:white;
+		padding:14px;
+		font-size:12px;
+		border-top:1px solid #ececec;
+		border-right:2px solid #ececec;
+		border-bottom:2px solid #ececec;
+		border-left:1px solid #ececec;
+		font-size:12px;
+		font-family:Arial,Helvetica,sans-serif;
+	}
+	#tooltip-arrow{
+		margin-top:-22px;
+		background-image:url('cabinet-shuffle-assets/tooltip.png');
+		width:13px;
+		height:8px;
+		margin-left:56px;
+	}
+	#tooltip h5{
+		font-size:14px;
+		margin:19px 0 0px;
+		font-weight:normal;
+		font-family: "PrattHeavy",sans-serif;
+	}
+#lookup-cabinet{
+	display:none;
+}
+/* Smartphones -------------------------------*/
+@media screen and (max-width: 480px) {
+	#gi p, #gi,.gi-chart,#gi-container{
+		margin-left:0;
+		width:100%;
+	}
+	.gi-next{
+		float:left !important;
+	}
+	p.large{
+		font-size:12px;
+		line-height:1.5;
+	}
+	#user-input h2{
+		font-size:31px;
+	}
+	#build-nav,#prepop-cabinet,#user-cabinet,#editor-cabinet,.current-minister,.gi-edit{
+		display:none !important;
+	}
+	.gi-unit.right{
+		float:right;
+	}
+	.gi-unit{
+		width:42%;
+		margin:0 5px 0 0;
+		padding:0;
+	}
+	.gi-unit .mp-img{
+		height:auto;
+	}
+	.gi-unit .mp-img img,.gi-unit .mp-img,.gi-unit .mp h5{
+		width:100%;
+	}
+	.gi-unit .mp h5{
+		clear:both;
+		font-size:15px;
+	}
+	#confirm-cabinet .gi-edit{
+		float:left !important;
+		margin-top:0 !important;
+	}
+	.mp-arrow{
+		display:none;
+	}
+	.mp-block-container{
+		overflow:visible;
+	}
+	.mp-others,.mp-block-container, .mp-block-container select{
+		width:100%;
+	}
+	.mp-container h3 .gi-next{
+		display:none !important;
+	}
+	.lede-cabinet .mp{
+		width:130px;
+	}
+	.lede-cabinet .mp-img, .lede-cabinet .mp-img img{
+		width:100%;
+	}
+}
+</style>
+<script type="text/javascript">
+var win = null;
+function share(mypage, myname, w, h, scroll, pos) {
+    if (pos == "random") {
+        LeftPosition = (screen.width) ? Math.floor(Math.random() * (screen.width - w)) : 100;
+        TopPosition = (screen.height) ? Math.floor(Math.random() * ((screen.height - h) - 75)) : 100;
+    }
+    if (pos == "center") {
+        LeftPosition = (screen.width) ? (screen.width - w) / 2 : 100;
+        TopPosition = (screen.height) ? (screen.height - h) / 2 : 100;
+    } else if ((pos != "center" && pos != "random") || pos == null) {
+        LeftPosition = 0;
+        TopPosition = 20
+    }
+    settings = 'width=' + w + ',height=' + h + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',location=no,directories=no,status=no,menubar=no,toolbar=no,resizable=no';
+    win = window.open(mypage, myname, settings);
+};
+</script>
+<script type="text/javascript">
+$('document').ready(function(){
+function addCommas(nStr)
+{
+	nStr += '';
+	x = nStr.split('.');
+	x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
+function getImage(name){
+	var nm = name.split(',');
+	return nm[0].replace(/ /g,'') + nm[1].replace(/ /g,'') + '_CPC.jpg';
+}
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+// Omniture tracking
+function interactiveTracking(description) {
+    s.linkTrackVars = "";   // we don't want to send any vars or props
+    s.linkTrackEvents = ""; // we don't want to trigger any events
+    s.tl(true, 'o', description);
+}
+// Get pre-loaded selections
+var vars = getUrlVars(),
+	userSel;
+
+if(typeof vars.cmp != 'undefined' && vars.cmp == 'email'){
+	interactiveTracking("Interactive - 20130617 - Cabinet Shuffle - Email click");
+}
+var readerPicks = '8-10-9-0-12';
+var finalPicks = '17-16-0-14-18';
+
+var ministers = "Public safety,Environment,Citizenship &<br />Immigration,International<br />Co-operation,House Leader".split(',');
+function userInputAnimate(id){
+	// Clear contents
+	$('#user-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+	$('#user-cabinet .mp h5').hide();
+	$('#user-cabinet').html('<h4>Most Common Reader Picks</h4>');
+	$.each(userData[id].content.split('-'), function(i,mp){
+		var content = '<div class="mp noselect">';
+		content += '<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + getImage(mps[mp].name) + '"/></div>';
+		// add Checkmark if right
+		if(finalPicks.split('-')[i] == mp) content += '<div class="checkmark"></div>';
+		content += '<h5>' + mps[mp].name.split(',')[1] + ' ' + mps[mp].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span></h5></div>';
+		$('#user-cabinet').append(content);
+	})
+	$('#user-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(150*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(160*i).fadeIn();
+		$(this).find('.checkmark').delay(170*i).fadeIn();
+	})
+	userCount++;
+	if(userCount == userData.length) userCount = 0;
+}
+function finalInputAnimate(id){
+	// Clear contents
+	$('#final-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+	$('#final-cabinet .mp h5').hide();
+	$('#final-cabinet').html('<h4>Harper\'s Final Selections</h4>');
+	$.each(userData[id].content.split('-'), function(i,mp){
+		var content = '<div class="mp noselect"><div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + getImage(mps[mp].name) + '"/></div><h5>' + mps[mp].name.split(',')[1] + ' ' + mps[mp].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span></h5></div>';
+		$('#final-cabinet').append(content);
+	})
+	$('#final-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(150*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(160*i).fadeIn();
+	})
+	userCount++;
+	if(userCount == userData.length) userCount = 0;
+}
+function lookupInputAnimate(id){
+	// Clear contents
+	correct = 0;
+	$('#lookup-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+	$('#lookup-cabinet .mp h5').hide();
+	$('#lookup-cabinet').html('<h4>' + userData[id].id + '\'s guesses</h4>');
+	$.each(userData[id].content.split('-'), function(i,mp){
+		var content = '<div class="mp noselect"><div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + getImage(mps[mp].name) + '"/></div>';
+		// add Checkmark if right
+		if(finalPicks.split('-')[i] == mp) content += '<div class="checkmark"></div>', correct+=1;
+		content += '<h5>' + mps[mp].name.split(',')[1] + ' ' + mps[mp].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span></h5></div>';
+		$('#lookup-cabinet').append(content);
+	})
+	$('#lookup-cabinet h4').append(': <span>' + correct + '/5 correct</span>');
+	$('#lookup-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(150*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(160*i).fadeIn();
+		$(this).find('.checkmark').delay(170*i).fadeIn();
+	})
+	userCount++;
+	if(userCount == userData.length) userCount = 0;
+}
+function readerInputAnimate(id){
+	// Clear contents
+	$('#reader-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+	$('#reader-cabinet .mp h5').hide();
+	$('#reader-cabinet').html('<h4>MOST COMMON GLOBE PICKS: <span>' + userData[id].id + '\'s cabinet</span></h4>');
+	$.each(userData[id].content.split('-'), function(i,mp){
+		var content = '<div class="mp noselect"><div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + getImage(mps[mp].name) + '"/></div><h5>' + mps[mp].name.split(',')[1] + ' ' + mps[mp].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span></h5></div>';
+		$('#reader-cabinet').append(content);
+	})
+	$('#reader-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(150*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(160*i).fadeIn();
+	})
+	readerCount++;
+	if(readerCount == userData.length) userCount = 0;
+}
+function prepopInputAnimate(){
+	$('#prepop-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(180*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(190*i).fadeIn();
+	})
+}
+function editorInputAnimate(){
+	$('#editor-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+	$('#editor-cabinet .mp h5').hide();
+	
+	$('#editor-cabinet .mp').each(function(i){
+		$(this).find('.mp-img img').delay(180*i).animate({
+			'marginTop':-20,
+			opacity:1
+		},300,"easeOutSine");
+		$(this).find('h5').delay(190*i).fadeIn();
+	})
+}
+// Populate social
+var tweetTxt = "I've created my own political cabinet on the @globeandmail. See it here and build your own: ";
+var emailTxt = "I've created my own political cabinet on The Globe and Mail. You can see it here and build your own: ";
+var shareURL = "http://www.theglobeandmail.com/article/"; 
+
+
+/* - Tabletop - */
+// Populate fields with MP data
+var key = '0AjibA9AlxCiLdEM2SWV5LXR3TGo2NnVYWXRfMUd0enc',
+	mps,
+  	userData = '',
+  	userT,
+  	editorT,
+	userCount = 0;
+
+ Tabletop.init( 
+        { 
+          key: key,
+          callback: function(spreadsheet, tabletop) { 
+             mps = spreadsheet;
+             var blockCount = -1,
+             	 stepCount = 0;
+//             if($('#gi').width()>500){
+             $.each(mps, function(i,mp){
+             	if(mp['id']<16){
+             	var name = mp.name.split(',');
+//             	if(stepCount == 0 || stepCount == 11) $('.mp-block-container').append('<div class="mp-sm-block"></div>'), blockCount++,stepCount=1;
+             	content = '<div class="mp sm" rel="' + mp.id + '">'
+             			+ '<div class="mp-img"><div class="onoff sm"></div><img alt="' + mp.bio + '" src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + name[0].replace(/ /g,'') + name[1].replace(/ /g,'') + '_CPC.jpg" /></div>'+ name[1] +'<br /> ' + name[0] + '</div>';
+             	$('.mp-block-container').append(content);
+             	if(blockCount == 0){
+             		$('.mp-block-container .mp-sm-block').eq(0).show().addClass('showing');
+             	}
+             	stepCount++;
+             	}
+             });
+/*             } else {
+             	$('.mp-block-container').append('<select></select>');
+             	$.each(mps, function(i,mp){
+             		var name = mp.name.split(',');
+             		$('.mp-block-container select').append('<option rel="' + mp.id + '" src="../olympics/mps-images/' + name[0].replace(/ /g,'') + name[1].replace(/ /g,'') + '_CPC.jpg" >' + name[1] + ' ' + name[0] + '</option>');
+             	})
+             }
+*/
+			 // Populate user data
+	        userData = [{
+	        	'content':readerPicks
+	        }];
+        	userInputAnimate(0);
+	        userData = [{
+	        	'content':finalPicks
+	        }];
+        	finalInputAnimate(0);
+			$('#final-cabinet').fadeIn();
+			if(typeof vars.ministers != 'undefined'){
+				$.each(vars.ministers.split('-'), function(i,mp){
+				var content = '<div class="mp noselect"><div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/' + getImage(mps[mp].name) + '"/></div><h5>' + mps[mp].name.split(',')[1] + ' ' + mps[mp].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span></h5></div>';
+				$('#prepop-cabinet').append(content);
+				})
+				$('#prepop-cabinet').show().addClass('showing');
+				prepopInputAnimate();
+			} else {
+			 var userKey = '0AjibA9AlxCiLdFlKcExWWEp6X0daMGNJa2puVWxId0E';
+			 Tabletop.init( 
+        		{ 
+		          key: userKey,
+        		  callback: function(spreadsheet, tabletop) { 
+        		  		if(spreadsheet.length > 0){
+	        		  		$('#editor-cabinet,#user-cabinet').fadeIn();
+    		      			userData = spreadsheet;
+//        				  	userInputAnimate(userCount);
+//							userT = setInterval(function(){
+//								userInputAnimate(userCount);
+//							},5000);
+						}
+          		},
+	        simpleSheet: true })
+	        }
+ 	    },
+        simpleSheet: true })
+
+// Populate emails
+$('#user-start a.retrieve').click(function(){
+	$("#email-not-found").fadeOut('fast');
+	if($('#user-start input').val() != '' && $('#user-start input').val() != 'Your email'){
+		var found = -1;
+		$.each(userData,function(i,d){
+			if(d['content2'].replace(/ /g,'').toLowerCase() == $('#user-start input').val().replace(/ /g,'').toLowerCase()) found = i;
+		})
+		if(found>-1){
+			lookupInputAnimate(found);
+			$('#lookup-cabinet').slideDown();
+		} else {
+			$('#email-not-found').fadeIn('fast');
+		}
+	}
+	return false;
+})
+// Build your own
+$('a.build').click(function(){
+	// Clear user area
+	clearInterval(userT);
+	$('#user-start,#user-input').fadeOut(function(){
+		$('#build-nav,#build-container').fadeIn();
+	});
+	$('.mp-nav').each(function(i){
+		$(this).delay(350*i).fadeIn();
+	})
+//	$('.mp-nav').eq(0).delay(500).fadeIn();
+	
+	$('.build-container').show();
+	$('.mp-container').eq(0).fadeIn();
+	// Present cabinet controls
+//	interactiveTracking("Interactive - 20130617 - Cabinet Shuffle - Begin interactive");
+	return false;
+})
+// Add MP on click
+$('.mp').live('click',function(){
+	if(!$(this).hasClass('noselect')){
+		// Remove other selections
+		$alreadySelected = $(this).parents('.mp-container').find('.selected');
+		$('.mp[rel=' + $alreadySelected.attr('rel') + ']').removeClass('noselect');
+		$alreadySelected.removeClass('selected');
+		
+		// Block off other matching rels
+		$('.mp[rel=' + $(this).attr('rel') + ']').addClass('noselect');
+		$(this).addClass('selected');
+		// Add to sidebar
+		var img = $(this).find('img').attr('src');
+		var eq = $(this).parents('.mp-container').index();
+		$('.mp-nav').eq(eq).find('img').fadeOut('fast', function(){
+			$(this).attr('src',img).fadeIn('fast');
+		});
+		$('.mp-nav').eq(eq).find('.mp-nav-bar').addClass('complete');
+		$('.mp-nav').eq(eq).attr('rel',$(this).attr('rel'));
+		$(this).parents('.mp-container').find('.gi-next').fadeIn();
+		// Trigger next screen for mobile
+		if($('#gi').width() < 500){
+			$(this).parents('.mp-container').find('.gi-next a').click();
+		}
+	}
+})
+$('#gi select').live('change',function(){
+	var $match = $(this).find('option:selected');
+	var $matchRel = $(this).find('option:selected').attr('rel');
+
+// Remove other selections
+		$alreadySelected = $(this).parents('.mp-container').find('.selected');
+		$('.mp[rel=' + $alreadySelected.attr('rel') + ']').removeClass('noselect');
+		$alreadySelected.removeClass('selected');
+		
+		// Block off other matching rels
+		$('.mp[rel=' + $matchRel + ']').addClass('noselect');
+		$(this).addClass('selected');
+		// Add to sidebar
+		var img = $match.attr('src');
+		var eq = $(this).parents('.mp-container').index();
+		$('.mp-nav').eq(eq).find('img').fadeOut('fast', function(){
+			$(this).attr('src',img).fadeIn('fast');
+		});
+		$('.mp-nav').eq(eq).find('.mp-nav-bar').addClass('complete');
+		$('.mp-nav').eq(eq).attr('rel',$matchRel);
+		$(this).parents('.mp-container').find('.gi-next').fadeIn();
+		// Trigger next screen for mobile
+		if($('#gi').width() < 500){
+			$(this).parents('.mp-container').find('.gi-next a').click();
+		}
+})
+// Go to next
+$('.gi-next a').click(function(){
+	var allChecked = true;
+	$.each($('.mp-nav'), function(){
+		if(!$(this).find('.mp-nav-bar').hasClass('complete')) allChecked = false;
+	})
+	if(allChecked){
+		shareURL = "http://www.theglobeandmail.com/article/?ministers=";
+		var query = '';
+		$('#confirm-cabinet .mp').each(function(i){
+			shareURL += $('.mp-nav').eq(i).attr('rel');
+			query += $('.mp-nav').eq(i).attr('rel');
+			if(i < $('#confirm-cabinet .mp').length-1) shareURL += '-', query += '-';
+			$(this).find('img').attr('src',$('.mp-nav').eq(i).find('img').attr('src'));
+			$(this).find('h5').html(mps[$('.mp-nav').eq(i).attr('rel')].name.split(',')[1] + ' ' + mps[$('.mp-nav').eq(i).attr('rel')].name.split(',')[0] + '<br /><span>' + ministers[i] + '</span>');
+//			interactiveTracking("Interactive - 20130617 - Cabinet Shuffle - MP Selection " + i + " - ID " + $('.mp-nav').eq(i).attr('rel'));
+		})
+		$('#gi-social').html('<p><strong>Now share your cabinet!</strong><br />Your friends will see your picks before creating their own.</p><a href="https://twitter.com/share?url='+shareURL+'&amp;text='+tweetTxt+'" rel="nofollow" onclick="share(this.href,\'template_window\',\'500\',\'400\',\'yes\',\'center\');return false" onfocus="this.blur()"><img src=\'http://beta.images.theglobeandmail.com/static/templates/interactives/photoquiz/images/twitter.png\' border="0" title="Share on Twitter" alt="Share on Twitter"/></a> <a href="http://www.facebook.com/share.php?u='+shareURL+'" rel="nofollow" onclick="share(this.href,\'template_window\',\'500\',\'400\',\'yes\',\'center\');return false" onfocus="this.blur()"><img src=\'http://beta.images.theglobeandmail.com/static/templates/interactives/photoquiz/images/facebook.png\' border="0" title="Share on Facebook" alt="Share on Facebook"/></a> <a href="mailto:?subject=Create your own political cabinet on The Globe and Mail&body='+emailTxt+''+shareURL+'" rel="email" title="Share by Email" id="em_link"><img alt="Share by Email" src="http://beta.images.theglobeandmail.com/static/templates/interactives/photoquiz/images/email.png"></a>');
+		$('#gi-iframe').html('<iframe src="http://stuartathompson.com/globedev/youtubeapi/cabinet-shuffle-sendvote.html?sel=' + query + '" width=350 height=200 frameborder="0"></iframe>');
+		$('.mp-container:visible,#build-nav').fadeOut(function(){
+			$('#confirm-cabinet').fadeIn();
+			// Animate in cabinet
+				$('#confirm-cabinet .mp-img img').css({'marginTop':161,'opacity':0});
+				$('#confirm-cabinet .mp h5').hide();
+				$('#confirm-cabinet .mp').each(function(i){
+					$(this).find('.mp-img img').delay(150*i).animate({
+						'marginTop':-20,
+						opacity:1
+					},300,"easeOutSine");
+					$(this).find('h5').delay(160*i).fadeIn();
+				})
+		});	
+	} else if($('.mp-container:visible').index() != 4){
+		$(this).parents('.mp-container').fadeOut(function(){
+			$(this).next().fadeIn();	
+		})
+		$('#build-nav').find('.selected').removeClass('selected').parents().next().find('.mp-nav-bar').addClass('selected');
+	} else {
+		$(this).parent().after('<div style="margin-top:10px;clear:both;float:right;">You have more positions to fill before you can proceed.</div>');
+	}
+	$('body,html').animate({
+		scrollTop:$('#build-container').offset().top
+	})
+	return false;
+})
+// Change type of minister on nav click
+$('.mp-nav').click(function(){
+	$('.mp-nav').find('.selected').removeClass('selected');
+	$(this).find('.mp-nav-bar').addClass('selected');
+	var eq = $(this).index();
+	$('.mp-container:visible').fadeOut(function(){
+		$('.mp-container').eq(eq-1).stop().fadeIn();		
+	});
+})
+// Rotate through "other MPs"
+$('.mp-arrow').click(function(){
+	if($(this).hasClass('right')){
+		if($('.mp-sm-block.showing').next().hasClass('mp-sm-block')){
+			$('.mp-sm-block.showing').animate({'left':-$('.mp-sm-block.showing').width()});
+			var $next = $('.mp-sm-block.showing').next();
+			$('.mp-sm-block.showing').next().css('left',800).show().animate({'left':0});
+			$('.showing').removeClass('showing');
+			$next.addClass('showing');
+		} else {
+			// jump to first
+			$('.mp-sm-block.showing').animate({'left':$('.mp-sm-block.showing').width()});
+			var $next = $('.mp-block-container > div:nth-child(1)');
+			$next.css('left',-$('.mp-sm-block.showing').width()).show().animate({'left':0});
+			$('.showing').removeClass('showing');
+			$next.addClass('showing');
+		}
+	} else {
+		if($('.mp-sm-block.showing').prev().hasClass('mp-sm-block')){
+			$('.mp-sm-block.showing').animate({'left':$('.mp-sm-block.showing').width()});
+			var $next = $('.mp-sm-block.showing').prev();
+			$('.mp-sm-block.showing').prev().css('left',-$('.mp-sm-block.showing').width()).show().animate({'left':0});
+			$('.showing').removeClass('showing');
+			$next.addClass('showing');
+		} else {
+			// jump to end
+			$('.mp-sm-block.showing').animate({'left':-$('.mp-sm-block.showing').width()});
+			var $next = $('.mp-block-container > div:nth-child(17)');
+			$next.css('left',800).show().animate({'left':0});
+			$('.showing').removeClass('showing');
+			$next.addClass('showing');
+		}
+	}
+})
+// Hover for other MPs
+if($('#gi').width()>500){
+$('.mp-others .mp').live('hover',function(e,i){
+	$('#tooltip').remove();
+	var x = 88*$(this).index();
+	if($(this).index()>7) x = 88*($(this).index()-8);
+		y = $(this).offset().top+$(this).height()//e.pageY;// $(this).parents('.mp-others').next().offset().top-20;
+	var name = $(this).text();
+	var text = $(this).find('img').attr('alt');
+	$(this).parents('.mp-others').after('<div id="tooltip"><div id="tooltip-arrow"></div><h5>' + name + '</h5> <p>' + text + '</p></div>');
+	$('#tooltip').css({'left':x+$('#tooltip').width()/2,'top':y});
+});
+}
+// Remove hover
+$('.current-minister,#gi-nav,.mp-arrow,.gi-unit').hover(function(){
+	$('#tooltip').remove();
+})
+// Edit the selections
+$('#confirm-cabinet .gi-edit').click(function(){
+	$('#confirm-cabinet').fadeOut(function(){
+		$('#build-nav').fadeIn();
+		$('.mp-container').eq(4).fadeIn();
+	})
+	return false;
+})
+// Submission form
+$('.gi-input').focus(function(){
+	if($(this).val() == $(this).attr('rel')){
+		$(this).val('');
+		$(this).css('color','#333');
+	}
+	$(this).blur(function(){
+		if($(this).val() == ''){
+			$(this).val($(this).attr('rel'));
+			$(this).css('color','#b0b0b0');
+		}
+	})
+})
+$('.gi-submit').click(function(){
+
+})
+
+})
+</script>
+
+<div id="gi">
+	<div id="gi-nav">
+		<div id="build-nav">
+			<h5>Your<br />Cabinet</h5>
+			<div class="mp-nav">
+				<div class="mp-nav-img"><img src="cabinet-shuffle-assets/blank.png" /></div>
+				<div class="mp-nav-bar selected"></div>
+				<div class="mp-nav-name">Public<br />Safety</div>
+			</div>
+			<div class="mp-nav">
+				<div class="mp-nav-img"><img src="cabinet-shuffle-assets/blank.png" /></div>
+				<div class="mp-nav-bar"></div>
+				<div class="mp-nav-name">Environment</div>
+			</div>
+			<div class="mp-nav">
+				<div class="mp-nav-img"><img src="cabinet-shuffle-assets/blank.png" /></div>
+				<div class="mp-nav-bar"></div>
+				<div class="mp-nav-name">Citizenship &<br />Immigration</div>
+			</div>
+			<div class="mp-nav">
+				<div class="mp-nav-img"><img src="cabinet-shuffle-assets/blank.png" /></div>
+				<div class="mp-nav-bar"></div>
+				<div class="mp-nav-name">International<br/>Co-operation</div>
+			</div>
+			<div class="mp-nav">
+				<div class="mp-nav-img"><img src="cabinet-shuffle-assets/blank.png" /></div>
+				<div class="mp-nav-bar"></div>
+				<div class="mp-nav-name">House<br />Leader</div>
+			</div>
+		</div>
+	</div>
+	<div id="gi-container">
+		<div id="user-input">
+			<h2>Results: Build your own political cabinet</h2>
+			<p class="large">Prime Minister Stephen Harper's cabinet shuffle includes a few changes and some familiar faces. Over the past several weeks we've asked Globe readers to predict who Harper would choose to fill five key portfolios. 
+  <p class="large">
+Harper's final selections are shown below along with the most popular picks by Globe readers.</p>
+<!--<hr />
+<p class="large"><strong>Did you play the game?</strong> Enter your email address below to retrieve your guesses and see how you fared.</p>
+			<div id="user-start">
+				<p><input type="text" rel="Your email" class="gi-input" value="Your email" /> <a href="#start" class="retrieve gi-button">Go</a><div id="email-not-found">Sorry, this email wasn't in our database. Check the spelling and try again.</div></p>
+			</div>
+			<div class="clearfloat" style="width:100%;clear:both;padding-top:40px;"></div>
+	-->		<hr />
+			<p class="large">Want to create you're own cabinet? Learn more about the portfolios and design your own cabinet below.</p>
+			<p><a href="#start" class="gi-button build">Start</a></p>
+			<div id="prepop-cabinet" class="lede-cabinet">
+				<h4>YOUR FRIEND'S SELECTION <span></span></h4>
+
+			</div>
+			<div id="lookup-cabinet" class="lede-cabinet"></div>
+			<div id="final-cabinet" class="lede-cabinet"></div>
+			<div id="user-cabinet" class="lede-cabinet"></div>
+		<!--	<div id="editor-cabinet" class="lede-cabinet">
+				<h4>GLOBE SELECTIONS: <span>John Ibbitson's cabinet</span></h4>
+				<div class="mp">
+					<div class="mp-img"><img src="cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Jean-Luc Picard</h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="cabinet-shuffle-assets/mp.png" /></div>
+					<h5>William Riker</h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Geordie LaForge</h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="cabinet-shuffle-assets/mp.png" /></div>				
+					<h5>Data</h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Dianna Troi</h5>
+				</div>
+			</div>-->
+		</div><!!-- user input -->
+		
+		<div id="build-container">
+			<div class="mp-container">
+				<h3>Pick your Minister of Public Safety <div class="gi-next"><a href="#next" class="gi-button right">Next</a></div></h3>
+				<p class="large">This minister oversees Canada’s national security, correctional system, borders and emergency management. Many federal agencies are responsible to the Public Safety Minister, including the Royal Canadian Mounted Police, Canada Border Services Agency and the Canadian Security Intelligence Service.</p>
+				<div class="gi-unit">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="2">
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/BergenCandice_CPC.jpg" />
+						</div>
+						<h5>Candice Bergen<br />
+							<span>Portage-Lisgar, Man.</span>						
+						</h5>
+						<p>Ms. Bergen has been an MP since 2008. She was appointed as the parliamentary secretary to the public safety minister in 2011. Before politics, she was a financial adviser.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="gi-unit right">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="8">
+						
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/GloverShelly_CPC.jpg" />
+						</div>
+						<h5>Shelly Glover<br />
+							<span>Saint Boniface, Man.</span>						
+						</h5>
+						<p>Ms. Glover has been an MP since 2008. She the parliamentary secretary to the finance minister. Before she was elected, she was a police officer.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+		<div class="mp-others">
+					<h6>Other MPs</h6>
+					<div class="mp-arrow right"></div>
+					<div class="mp-arrow left"></div>
+					<div class="mp-block-container"></div>
+		</div><!-- .mp-others -->
+		<div class="current-minister">
+		<h4>New minister</h4>
+					<div class="mp sm noselect">
+						<div class="mp-img">
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/BlaneySteven_CPC.jpg" />
+						</div>
+					</div>
+				<p class="large">
+<strong>Steven Blaney, Public Safety Minister, 2013-</strong><br />
+Mr. Blaney has been the MP for Lévis-Bellechasse, Quebec since 2006. He has been appointed the Minister of Public Safety and Emergency Preparedness, after holding the veterans affairs portfolio for two years. Before entering federal politics, he worked as an engineer and environmental consultant.</p>
+		</div>
+				
+				<div class="gi-next"><a href="#next" class="gi-button right">Next</a></div>
+			</div><!-- .mp-container -->
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="mp-container">
+				<h3>Pick your Minister of the Environment <div class="gi-next"><a href="#next" class="gi-button right">Next</a></div></h3>
+								<p class="large">This minister is responsible for parks, environmental assessments and Environment Canada. The federal department acts to conserve Canada’s natural environment and monitors the weather, pollution, greenhouse-gas emissions and more.
+</p>
+
+				<div class="gi-unit">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="10">
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/KentPeter_CPC.jpg" />
+						</div>
+						<h5>Peter Kent<br />
+							<span>Thornhill, Ont.</span>				
+						</h5>
+						<p>Mr. Kent has been an MP since 2008 and the environment minister since 2011. Before that, he was a television journalist.
+</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="gi-unit right">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="11">
+						
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/LeitchKellie_CPC.jpg" />
+						</div>
+						<h5>Kellie Leitch<br />
+							<span>Simcoe-Grey, Ont.</span>						
+						</h5>
+						<p>Ms. Leitch has been an MP since 2011. She is the parliamentary secretary to the labour minister and the human resources minister. She is also a pediatric orthopedic surgeon, physician, and an associate professor of medicine.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="mp-others">
+					<h6>Other MPs</h6>
+					<div class="mp-arrow right"></div>
+					<div class="mp-arrow left"></div>
+					<div class="mp-block-container"></div>
+				</div>
+						<div class="current-minister">
+
+<h4>New Minister</h4>
+
+					<div class="mp sm noselect">
+						<div class="mp-img">
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/AglukkaqLeona_CPC.jpg" />
+						</div>
+					</div>
+				<p class="large">
+<strong>Leona Aglukkaq, Minister of the Environment, 2013-</strong><br />
+Ms. Aglukkaq has been the MP for Nunavut since 2008, and has been appointed the Minister of Environment, CanNor, and Arctic Council.  She served as the Health Minister and Regional Minister for Northwest Territories, Nunavut, and the Yukon. Before becoming a federal MP, she was a senior officer of the government of Nunavut.
+</p>
+				</div>
+				<div class="gi-next"><a href="#next" class="gi-button right">Next</a></div>
+			</div><!-- .mp-container -->
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="mp-container">
+				<h3>Pick your Citizenship and Immigration Minister <div class="gi-next"><a href="#next" class="gi-button right">Next</a></div></h3>
+								<p class="large">This minister runs the federal department that controls who comes into the country and how they become citizens. Citizenship and Immigration Canada also promotes multiculturalism and processes refugee claims.
+</p>
+
+				<div class="gi-unit right">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="9">
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/KenneyJason_CPC.jpg" />
+						</div>
+						<h5>Jason Kenney<br />
+							<span>Calgary Southeast, Alta.</span>						
+						</h5>
+						<p>Mr. Kenney has been an MP since 1997. He has been the Immigration minister since the 2008 election. Before politics, he was a lobbyist.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="gi-unit">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="4">
+						
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/DykstraRick_CPC.jpg" />
+						</div>
+						<h5>Rick Dykstra<br />
+							<span>St. Catherines, Ont.</span>						
+						</h5>
+						<p>Mr. Dykstra has been an MP since 2006. He has been the parliamentary secretary to the citizenship and immigration minister since 2008. Before federal politics, he was a St. Catharines city councillor from 1991-1997.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="mp-others">
+					<h6>Other MPs</h6>
+					<div class="mp-arrow right"></div>
+					<div class="mp-arrow left"></div>
+					<div class="mp-block-container"></div>
+				</div>
+						<div class="current-minister">
+
+<h4>New Minister</h4>
+
+					<div class="mp sm noselect">
+						<div class="mp-img">
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/AlexanderChris_CPC.jpg" />
+						</div>
+					</div>
+				<p class="large">
+<strong>Chris Alexander, Citizenship and Immigration Minister, 2013-</strong><br />
+Mr. Kenney has been an MP since 1997. He has been the Immigration minister since the 2008 election. Before politics, he was a lobbyist.
+</p>
+				</div>
+				<div class="gi-next"><a href="#next" class="gi-button right">Next</a></div>
+			</div><!-- .mp-container -->
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="mp-container">
+				<h3>Pick your International Co-operation Minister <div class="gi-next"><a href="#next" class="gi-button right">Next</a></div></h3>
+								<p class="large">This minister is responsible for Canada’s aid to foreign countries. Previously, that meant running the Canadian International Development Agency. But the Conservatives announced with the 2013 budget that they would keep the minister and merge the agency with the department responsible for foreign affairs and international trade.
+</p>
+
+				<div class="gi-unit">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="0">
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/AlexanderChris_CPC.jpg" />
+						</div>
+						<h5>Chris Alexander<br />
+							<span>Ajax-Pickering, Ont.</span>						
+						</h5>
+						<p>Mr. Alexander is currently serving as the parliamentary secretary to the defence minister. Before he was elected in 2011, he was Canada’s first resident ambassador in Kabul, Afghanistan.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="gi-unit right">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="15">
+						
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/RempelMichelle_CPC.jpg" />
+						</div>
+						<h5>Michelle Rempel<br />
+							<span>Calgary Centre-North, Alta.</span>						
+						</h5>
+						<p>Ms. Rempel has been an MP since 2011. She is the parliamentary secretary to the environment minister. Before politics, she was a management consultant and a research administrator.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="mp-others">
+					<h6>Other MPs</h6>
+					<div class="mp-arrow right"></div>
+					<div class="mp-arrow left"></div>
+					<div class="mp-block-container"></div>
+				</div>
+						<div class="current-minister">
+
+<h4>New Minister</h4>
+
+					<div class="mp sm noselect">
+						<div class="mp-img">
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/ParadisChristian_CPC.jpg" />
+						</div>
+					</div>
+				<p class="large">
+<strong>Christian Paradis, International Co-operation Minister, 2013-</strong><br />
+Christian Paradis has been the MP for Mégantic-L’Érable in Quebec since 2006. He was the industry minister and minister of state for agriculture. He has held the natural resources and public works portfolios and was a lawyer before politics.
+</p>
+				</div>
+				<div class="gi-next"><a href="#next" class="gi-button right">Next</a></div>
+			</div><!-- .mp-container -->
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="mp-container">
+				<h3>Pick your House Leader <div class="gi-next"><a href="#next" class="gi-button right">Submit</a></div></h3>
+								<p class="large">The Leader of the Government in the House of Commons guides the party’s program through the House. The House Leader is responsible for managing the party in power’s legislative agenda, and co-ordinating with the Leader of the Government in the Senate and various opposition leaders.</p>
+
+				<div class="gi-unit">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="13">
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/LukiwskiTom_CPC.jpg" />
+						</div>
+						<h5>Tom Lukiwski<br />
+							<span>Regina-Lumsden-Lake Centre, Saskatchewan</span>						
+						</h5>
+						<p>Mr. Lukiwski has been an MP since 2004. He is the parliamentary secretary to the leader of government in the House of Commons, and sits on the standing committee on procedure and House affairs.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="gi-unit right right">
+					<h6>Globe Pick</h6>
+					<div class="mp" rel="12">
+						
+						<div class="mp-img">
+							<div class="onoff lg"></div>
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/MooreJames_CPC.jpg" />
+						</div>
+						<h5>James Moore<br />
+							<span>Port Moody-Westwood-Port Coquitlam, B.C.</span>						
+						</h5>
+						<p>Mr Moore has been an MP since 2000. He has been the heritage minister since 2008. Before politics, he was a broadcaster.</p>				
+					</div><!-- .mp -->
+				</div><!-- .gi-unit -->
+				<div class="mp-others">
+					<h6>Other MPs</h6>
+					<div class="mp-arrow right"></div>
+					<div class="mp-arrow left"></div>
+					<div class="mp-block-container"></div>
+				</div>
+						<div class="current-minister">
+
+<h4>New Minister</h4>
+
+					<div class="mp sm noselect">
+						<div class="mp-img">
+							<img src="http://beta.images.theglobeandmail.com/static/politics/mpunity/mps-images/LoanVanPeter_CPC.jpg" />
+						</div>
+					</div>
+				<p class="large">
+<strong>Peter Van Loan, House Leader, 2011-</strong><br />
+Mr. Van Loan has been the MP for York-Simcoe, Ontario since 2004. He will continue his position as Leader of the Government in the House of Commons, which he held from 2007-2008, and resumed in 2011. Before becoming a federal MP, he was a lawyer and a professor.
+</p>
+				</div>
+				<div class="gi-next"><a href="#next" class="gi-button right">Submit</a></div>
+			</div><!-- .mp-container -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		<div id="confirm-cabinet" class="mp-container lede-cabinet">
+			<h2>This is your cabinet</h2>
+			<div style="float:right;width:100%;text-align:right;margin:0 0 10px 0;">
+				<a href="#revise" class="gi-button gi-edit">Edit</a>
+			</div>
+			<div style="float:left;width:100%">
+				<div class="mp">
+					<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/cabinetshuffle/cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Jean-Luc Picard<br /><span>Finance Minister</span></h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/cabinetshuffle/cabinet-shuffle-assets/mp.png" /></div>
+					<h5>William Riker<br /><span>Finance Minister</span></h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/cabinetshuffle/cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Geordie LaForge<br /><span>Finance Minister</span></h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/cabinetshuffle/cabinet-shuffle-assets/mp.png" /></div>				
+					<h5>Data<br /><span>Finance Minister</span></h5>
+				</div>
+				<div class="mp">
+					<div class="mp-img"><img src="http://beta.images.theglobeandmail.com/static/politics/cabinetshuffle/cabinet-shuffle-assets/mp.png" /></div>
+					<h5>Dianna Troi<br /><span>Finance Minister</span></h5>
+				</div>
+			</div>
+			<div style="float:left;width:100%">
+				<div id="gi-social">
+					<p><strong>Now share your cabinet!</strong><br />
+					Your friends will see your picks before creating their own.
+				</div>
+			</div>
+<!--			<p class="large"><strong>How accurate is your cabinet?</strong> Enter your name and we can present your cabinet to other readers. You can also provide us with your email so we can let you know the results once Mr. Harper selects his real cabinet.</p>
+			<!--<div id="confirm-username">
+				<input type="text" class="gi-input" value="Your name"/>
+			</div>
+			<div id="confirm-email">
+				<input type="text" class="gi-input" value="Your email"/>
+			</div>
+			<div>
+				<a href="submit" class="gi-button">Submit</a>
+			</div>-->
+			<div id="gi-iframe"></div>
+		</div>
+			
+			
+		</div>
+	</div>
+	</div><!-- gi-container-->
+
+	<div id="viz"></div>
+
+</div>
